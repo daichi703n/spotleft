@@ -31,4 +31,4 @@ build/
 .vscode/
 
 ### Optional ###
-credentials.yml
+credentials*.yml

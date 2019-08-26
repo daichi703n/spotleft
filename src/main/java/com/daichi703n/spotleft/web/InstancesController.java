@@ -30,7 +30,7 @@ public class InstancesController {
         final AmazonEC2 ec2 = AmazonEC2ClientBuilder.defaultClient();
         boolean done = false;
 
-        List<HashMap<String,String>> instances = new ArrayList<HashMap<String,String>>();
+        List<SpotleftInfo> instances = new ArrayList<SpotleftInfo>();
 
         DescribeInstancesRequest request = new DescribeInstancesRequest();
         while(!done) {
@@ -50,29 +50,28 @@ public class InstancesController {
                     //     instance.getState().getName(),
                     //     instance.getMonitoring().getState());
 
-                    HashMap<String,String> tHashMap = new HashMap<String,String>();
+                    SpotleftInfo spotleftInfo = new SpotleftInfo();
                     for(Tag tag : instance.getTags()){
                         if (tag.getKey() == null){break;}
                         switch (tag.getKey()){
                         case "Name":
-                            tHashMap.put("InstanceName",tag.getValue());
+                            spotleftInfo.setName(tag.getValue());
                             continue;
                         case "deployment":
-                            tHashMap.put("InstanceDeployment",tag.getValue());
+                        spotleftInfo.setDeployment(tag.getValue());
                             continue;
                         default:
                             continue;
                         }
                             
                     }
-                    tHashMap.put("InstanceId",instance.getInstanceId());
-                    tHashMap.put("InstanceType",instance.getInstanceType());
-                    tHashMap.put("InstanceLifeCycle",instance.getInstanceLifecycle());
-                    tHashMap.put("InstanceState",instance.getState().getName());
-                    tHashMap.put("InstanceLaunchTime",instance.getLaunchTime().toString());
-                    instances.add(tHashMap);
-                    SpotleftInfo spotleftInfo = new SpotleftInfo();
                     spotleftInfo.setId(instance.getInstanceId());
+                    spotleftInfo.setType(instance.getInstanceType());
+                    spotleftInfo.setLifeCycle(instance.getInstanceLifecycle());
+                    spotleftInfo.setState(instance.getState().getName());
+                    spotleftInfo.setLaunchTime(instance.getLaunchTime().toString());
+                    instances.add(spotleftInfo);
+
                     System.out.println(spotleftInfo.getId());
                 }
             }
@@ -87,8 +86,8 @@ public class InstancesController {
         }
 
 
-        model.addAttribute("msg",instances);
-        return "instances/list";
+        model.addAttribute("instances",instances);
+        return "instances/current";
     }
 
 }
