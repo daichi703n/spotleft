@@ -8,8 +8,8 @@ cloud:
   aws:
     # Set by autoconfigure
     # credentials:
-      # accessKey: ${AWS_ACCESS_KEY_ID}
-      # secretKey: ${AWS_SECRET_ACCESS_KEY}
+    #   accessKey: ${AWS_ACCESS_KEY_ID}
+    #   secretKey: ${AWS_SECRET_ACCESS_KEY}
     stack:
       # CloudFormationのスタック名を自動取得しない
       auto: false
