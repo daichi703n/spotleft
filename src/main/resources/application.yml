@@ -35,3 +35,4 @@ spring:
     url: jdbc:mysql://h-cent-doc01.designet.local:3306/spotleft
     user: spring
     password: boot
+    locations: filesystem:src/main/resources/db/migration
