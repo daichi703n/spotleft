@@ -98,6 +98,24 @@
 				<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency> -->
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -118,7 +136,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>6.0.0</version>
+				<!-- <configuration>
+					<configFiles>src/main/resources/application.yml</configFiles>
+				</configuration> -->
+			</plugin>
 		</plugins>
+
 		<!-- <extensions>
 			<extension>
 					<groupId>org.springframework.build</groupId>
