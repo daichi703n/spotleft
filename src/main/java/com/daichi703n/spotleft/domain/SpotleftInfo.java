@@ -8,7 +8,7 @@ import lombok.Setter;
 public class SpotleftInfo {
   private String name;
   private String deployment;
-  private String id;
+  private String instanceId;
   private String type;
   private String lifeCycle;
   private String state;

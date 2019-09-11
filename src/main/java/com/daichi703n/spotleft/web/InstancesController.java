@@ -65,14 +65,14 @@ public class InstancesController {
                         }
                             
                     }
-                    spotleftInfo.setId(instance.getInstanceId());
+                    spotleftInfo.setInstanceId(instance.getInstanceId());
                     spotleftInfo.setType(instance.getInstanceType());
                     spotleftInfo.setLifeCycle(instance.getInstanceLifecycle());
                     spotleftInfo.setState(instance.getState().getName());
                     spotleftInfo.setLaunchTime(instance.getLaunchTime().toString());
                     instances.add(spotleftInfo);
 
-                    System.out.println(spotleftInfo.getId());
+                    System.out.println(spotleftInfo.getInstanceId());
                 }
             }
 
