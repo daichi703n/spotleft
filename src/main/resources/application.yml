@@ -25,14 +25,14 @@ spring:
     url: jdbc:mysql://h-cent-doc01.designet.local:3306/spotleft
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    driverClassName: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   # Does not work?
   flyway:
     enabled: true
     baseline-version: 1.0.0
     baseline-on-migrate: true
-    url: jdbc:mysql://h-cent-doc01.designet.local:3306/spotleft
+    url: jdbc:mysql://h-cent-doc01.designet.local:3306/spotleft?character_set_server=utf8mb4
     user: spring
     password: boot
     locations: filesystem:src/main/resources/db/migration
