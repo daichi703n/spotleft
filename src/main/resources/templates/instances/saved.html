@@ -23,9 +23,15 @@
         <td th:text="${i.getName()}"/>
         <td th:text="${i.getDeployment()}"/>
         <td th:text="${i.getRequireSpot()}"/>
-        <td th:text="Save" class="btn btn-primary" onclick="hideNotFirst()"/>
+        <td>
+          <a class="btn btn-primary" th:href="@{'/saved/'+${i.getId()}+'/edit'}">Edit</a>
+          <form th:action="@{'/saved/'+${i.getId()}}" th:method="delete">
+            <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?')"/>
+          </form>
+    </td>
       </tr>
     </table>
+    <a class="btn btn-success" th:href="@{/saved/new}">New</a>
 
   <p th:text="${msg}" />
   <div th:replace="fragments/footer :: footer">&copy; Footer</div>

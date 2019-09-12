@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Spotleft - Saved Instances</title>
+    <div th:replace="fragments/header :: head">Header</div>
+  </head>
+<body>
+  <div th:replace="fragments/header :: header">Header</div>
+    <div class="container">
+      <h1>Edit Saved Instance</h1>
+        <form th:action="@{/saved/{id}(id=*{id})}" th:method="put" th:object="${savedInstance}">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input class="form-control" type="text" th:field="*{name}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Deployment</label>
+          <input class="form-control" type="text" th:field="*{deployment}" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">RequireSpot</label>
+          <input class="form-control" type="checkbox" th:field="*{requireSpot}" />
+        </div>
+        <button class="btn btn-primary" type="submit">Update</button>
+      </form>
+      <div class="pull-right">
+        <a class="btn btn-link" href="/saved">Back</a>
+      </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">&copy; Footer</div>
+</body>
+</html>
