@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="instances")
-public class SavedInstance{
+public class SavedInstance extends TimestampEntity{
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,6 +27,6 @@ public class SavedInstance{
   private String deployment = "-";
 
   @Column(name="requireSpot")
-  private Boolean requireSpot;
+  private Boolean requireSpot = false;
 
 }
