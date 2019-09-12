@@ -12,7 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="instances")
-public class SavedInstances{
+public class SavedInstance{
 
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)

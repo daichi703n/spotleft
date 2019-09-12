@@ -22,7 +22,7 @@ import com.amazonaws.services.ec2.model.Tag;
 
 @Controller
 @RequestMapping("/instances")
-public class InstancesController {
+public class InstanceController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String instances(Model model) {
