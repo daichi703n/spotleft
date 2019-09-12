@@ -18,15 +18,15 @@ public class SavedInstancesService {
         return savedInstancesRepository.findAll();
     }
 
-    // public SavedInstances findOne(Long id) {
-    //     return savedInstancesRepository.findOne(id);
-    // }
+    public SavedInstances findById(Long id) {
+        return savedInstancesRepository.findById(id).orElse(null);
+    }
 
     public SavedInstances save(SavedInstances savedInstances) {
         return savedInstancesRepository.save(savedInstances);
     }
 
-    // public void delete(Long id) {
-    //   savedInstancesRepository.delete(id);
-    // }
+    public void delete(Long id) {
+        savedInstancesRepository.deleteById(id);
+    }
 }
