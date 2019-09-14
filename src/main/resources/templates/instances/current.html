@@ -33,12 +33,11 @@
         <td th:text="${i.getLifeCycle()}"/>
         <td th:text="${i.getRequireSpot()}"/>
         <td th:text="${i.getIsSaved()}"/>
-        <td th:text="Save" class="btn btn-primary" onclick="hideNotFirst()"/>
-        <!-- <td>
-          <span th:each="m, mStat : ${minute[hStat.index]}">
-            <span th:text="${m.getMinute()}" class="mr-2" th:classappend="${(m.getIsFirst().equals('True') ? 'font-weight-bold' : 'notFirst text-secondary')}"/>
-            </span>
-        </td> -->
+        <td>
+          <form th:action="@{/saved(name=${i.getName()},deployment=${i.getDeployment()},requireSpot=${i.getRequireSpot()})}" th:method="post">
+            <input class="btn btn-primary" type="submit" value="Save" />
+          </form>
+        </td>
       </tr>
     </table>
 

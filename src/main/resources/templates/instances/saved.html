@@ -28,7 +28,7 @@
           <form th:action="@{'/saved/'+${i.getId()}}" th:method="delete">
             <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?')"/>
           </form>
-    </td>
+        </td>
       </tr>
     </table>
     <a class="btn btn-success" th:href="@{/saved/new}">New</a>
