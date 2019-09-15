@@ -66,6 +66,7 @@ public class AwsInstanceService {
                         try{
                             if (s.getName().equals(spotleftInfo.getName())){
                                 spotleftInfo.setIsSaved(true);
+                                spotleftInfo.setSavedId(s.getId());
                                 spotleftInfo.setRequireSpot(s.getRequireSpot());
                             }
                         }catch(NullPointerException e){

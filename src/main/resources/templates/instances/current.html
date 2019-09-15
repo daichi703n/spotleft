@@ -38,9 +38,12 @@
         <td th:text="${i.getRequireSpot()}"/>
         <td th:text="${i.getIsSaved()}"/>
         <td>
-          <form th:action="@{/saved(name=${i.getName()},deployment=${i.getDeployment()},requireSpot=${i.getRequireSpot()})}" th:method="post">
-            <input class="btn btn-primary" type="submit" value="Save" />
-          </form>
+          <div th:switch="${i.getIsSaved()}">
+            <form th:case=false th:action="@{/saved(name=${i.getName()},deployment=${i.getDeployment()},requireSpot=${i.getRequireSpot()})}" th:method="post">
+              <input class="btn btn-primary" type="submit" value="Save" />
+            </form>
+            <a th:case=true class="btn btn-primary" th:href="@{'/saved/'+${i.getSavedId()}+'/edit'}">Update</a>
+          </div>
         </td>
       </tr>
     </table>

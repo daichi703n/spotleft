@@ -15,4 +15,5 @@ public class SpotleftInfo {
   private String launchTime;
   private Boolean requireSpot = true;
   private Boolean isSaved = false;
+  private Long savedId;
 }
