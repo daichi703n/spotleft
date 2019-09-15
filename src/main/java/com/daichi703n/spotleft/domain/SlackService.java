@@ -34,6 +34,7 @@ public class SlackService {
         String username = System.getenv("SLACK_USERNAME");
         String channel = System.getenv("SLACK_CHANNEL");
         String iconEmoji = System.getenv("SLACK_ICON_EMOJI");
+        String spotleftUrl = System.getenv("SPOTLEFT_URL");
 
         List<Attachment> attachments = new ArrayList<Attachment>();
 
@@ -69,7 +70,7 @@ public class SlackService {
 
         
         Payload payload = Payload.builder()
-            .text("Spotleft found illegal normal instance")
+            .text("<"+spotleftUrl+"/instances|Spotleft found illegal normal instance>")
             .username(username)
             .channel(channel)
             .iconEmoji(iconEmoji)
