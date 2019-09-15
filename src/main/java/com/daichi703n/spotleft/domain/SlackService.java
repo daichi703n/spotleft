@@ -29,7 +29,9 @@ public class SlackService {
     }
 
     public WebhookResponse send(List<SpotleftInfo> instances) throws IOException {
+        // TODO: load from application.yml
         String url = System.getenv("SLACK_WEBHOOK_URL");
+        String username = System.getenv("SLACK_USERNAME");
         String channel = System.getenv("SLACK_CHANNEL");
         String iconEmoji = System.getenv("SLACK_ICON_EMOJI");
 
@@ -68,6 +70,7 @@ public class SlackService {
         
         Payload payload = Payload.builder()
             .text("Spotleft found illegal normal instance")
+            .username(username)
             .channel(channel)
             .iconEmoji(iconEmoji)
             .attachments(attachments)
