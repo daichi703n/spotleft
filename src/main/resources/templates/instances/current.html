@@ -6,7 +6,8 @@
   </head>
 <body>
   <div th:replace="fragments/header :: header">Header</div>
-    <h1>Spotleft - AWS Instances</h1>
+  <div th:class="container">
+      <h1>Spotleft - AWS Instances</h1>
 
     <form th:action="@{/instances/notify}" th:method="post">
       <input class="btn btn-success float-right" type="submit" value="Notify" />
@@ -47,8 +48,7 @@
         </td>
       </tr>
     </table>
-
-  <p th:text="${msg}" />
+  </div>
   <div th:replace="fragments/footer :: footer">&copy; Footer</div>
 </body>
 </html>

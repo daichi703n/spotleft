@@ -6,6 +6,7 @@
   </head>
 <body>
   <div th:replace="fragments/header :: header">Header</div>
+  <div th:class="container">
     <h1>Spotleft - Saved Instances Info</h1>
 
     <table class="table table-striped">
@@ -24,15 +25,17 @@
         <td th:text="${i.getDeployment()}"/>
         <td th:text="${i.getRequireSpot()}"/>
         <td>
-          <a class="btn btn-primary" th:href="@{'/saved/'+${i.getId()}+'/edit'}">Edit</a>
-          <form th:action="@{'/saved/'+${i.getId()}}" th:method="delete">
-            <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?')"/>
-          </form>
+          <div style="display:inline-flex">
+            <a class="btn btn-primary" th:href="@{'/saved/'+${i.getId()}+'/edit'}">Edit</a>
+            <form th:action="@{'/saved/'+${i.getId()}}" th:method="delete">
+              <input class="btn btn-danger ml-1" type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete?')"/>
+            </form>
+          </div>
         </td>
       </tr>
     </table>
     <a class="btn btn-success" th:href="@{/saved/new}">New</a>
-
+  </div>
   <p th:text="${msg}" />
   <div th:replace="fragments/footer :: footer">&copy; Footer</div>
 </body>
