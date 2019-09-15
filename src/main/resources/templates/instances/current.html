@@ -8,6 +8,10 @@
   <div th:replace="fragments/header :: header">Header</div>
     <h1>Spotleft - AWS Instances</h1>
 
+    <form th:action="@{/instances/notify}" th:method="post">
+      <input class="btn btn-success float-right" type="submit" value="Notify" />
+    </form>
+
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
