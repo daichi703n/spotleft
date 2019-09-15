@@ -39,3 +39,6 @@ spring:
     user: spring
     password: boot
     locations: filesystem:src/main/resources/db/migration
+
+cron:
+  cron1: "${SPOTLEFT_CRON:0 55 8 * * MON-FRI}"
