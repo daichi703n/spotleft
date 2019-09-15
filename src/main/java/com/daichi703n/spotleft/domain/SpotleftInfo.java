@@ -10,7 +10,7 @@ public class SpotleftInfo {
   private String deployment;
   private String instanceId;
   private String type;
-  private String lifeCycle;
+  private String lifecycle;
   private String state;
   private String launchTime;
   private Boolean requireSpot = false;
