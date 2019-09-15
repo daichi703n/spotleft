@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.daichi703n.spotleft.domain.SavedInstance;
+import com.daichi703n.spotleft.domain.SavedInstanceService;
 import com.daichi703n.spotleft.domain.SpotleftInfo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +27,9 @@ import com.amazonaws.services.ec2.model.Tag;
 @RequestMapping("/instances")
 public class InstanceController {
 
+    @Autowired
+    private SavedInstanceService savedInstanceService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String instances(Model model) {
 
@@ -31,6 +37,7 @@ public class InstanceController {
         boolean done = false;
 
         List<SpotleftInfo> instances = new ArrayList<SpotleftInfo>();
+        List<SavedInstance> savedInstances = savedInstanceService.findAll();
 
         DescribeInstancesRequest request = new DescribeInstancesRequest();
         while(!done) {
@@ -72,7 +79,18 @@ public class InstanceController {
                     spotleftInfo.setLaunchTime(instance.getLaunchTime().toString());
                     instances.add(spotleftInfo);
 
-                    System.out.println(spotleftInfo.getInstanceId());
+                    savedInstances.forEach( s -> {
+                        try{
+                            if (s.getName().equals(spotleftInfo.getName())){
+                                spotleftInfo.setIsSaved(true);
+                                spotleftInfo.setRequireSpot(s.getRequireSpot());
+                            }
+                        }catch(NullPointerException e){
+                            e.printStackTrace();
+                        }
+                    });
+
+                    // System.out.println(spotleftInfo.getInstanceId());
                 }
             }
 
