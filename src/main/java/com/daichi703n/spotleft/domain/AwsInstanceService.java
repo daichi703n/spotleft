@@ -53,7 +53,11 @@ public class AwsInstanceService {
                     }
                     spotleftInfo.setInstanceId(instance.getInstanceId());
                     spotleftInfo.setType(instance.getInstanceType());
-                    spotleftInfo.setLifeCycle(instance.getInstanceLifecycle());
+                    if(instance.getInstanceLifecycle() == null){
+                        spotleftInfo.setLifecycle("normal");
+                    }else{
+                        spotleftInfo.setLifecycle(instance.getInstanceLifecycle());
+                    }
                     spotleftInfo.setState(instance.getState().getName());
                     spotleftInfo.setLaunchTime(instance.getLaunchTime().toString());
                     instances.add(spotleftInfo);
