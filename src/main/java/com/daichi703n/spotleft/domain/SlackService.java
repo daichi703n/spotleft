@@ -68,19 +68,22 @@ public class SlackService {
             attachments.add(attachment);
         });
 
-        
-        Payload payload = Payload.builder()
-            .text("<"+spotleftUrl+"/instances|Spotleft found illegal normal instance>")
-            .username(username)
-            .channel(channel)
-            .iconEmoji(iconEmoji)
-            .attachments(attachments)
-            .build();
-        
-        Slack slack = Slack.getInstance();
-        WebhookResponse response = slack.send(url, payload);
-        // response.code, response.message, response.body
+        if (attachments.isEmpty()){
+            return null;
+        }else{
+            Payload payload = Payload.builder()
+                .text("<"+spotleftUrl+"/instances|Spotleft found illegal normal instance>")
+                .username(username)
+                .channel(channel)
+                .iconEmoji(iconEmoji)
+                .attachments(attachments)
+                .build();
+            
+            Slack slack = Slack.getInstance();
+            WebhookResponse response = slack.send(url, payload);
+            // response.code, response.message, response.body
 
-        return response;
+            return response;
+        }
     }
 }
