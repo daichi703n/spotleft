@@ -1,4 +1,4 @@
-# Spotleft
+# Spotleft :flashlight:
 
 Spotlight on AWS spot instance.
 
@@ -21,19 +21,19 @@ When you use AWS spot instance by Cloud Foundry BOSH, some instance will be star
 
 ## Configurations
 
-| key                   | about                               | example                                   |
-| --------------------- | ----------------------------------- | ----------------------------------------- |
-| AWS_ACCESS_KEY_ID     | Access key id for accessing AWS     | AKIAXXX                                   |
-| AWS_SECRET_ACCESS_KEY | Secter access key for accessing AWS | SECRET                                    |
-| DB_USERNAME           | Database username                   | spring                                    |
-| DB_PASSWORD           | Database password                   | boot                                      |
-| SLACK_WEBHOOK_URL     | Slack incoming webhook URL          | https://hooks.slack.com/services/XXX/XXX/ |
-| SLACK_USERNAME        | Slack username on post              | Spotleft                                  |
-| SLACK_CHANNEL         | Slack channel to post               | #private                                  |
-| SLACK_ICON_EMOJI      | Slack emoji on post                 | :flashlight:                              |
-| SPOTLEFT_URL          | Slack message link URL              | http://localhost:8080                     |
-| SPOTLEFT_EXCLUDE_NAME | Exclude instance to notify          | bosh-health-check                         |
-| SPOTLEFT_CRON         | Cron schedule to check and notify   | 0 0 0 * * SUN-SAT                         |
+| key                   | about                               | example                                     |
+| --------------------- | ----------------------------------- | ------------------------------------------- |
+| AWS_ACCESS_KEY_ID     | Access key id for accessing AWS     | `AKIAXXX`                                   |
+| AWS_SECRET_ACCESS_KEY | Secter access key for accessing AWS | `SECRET`                                    |
+| DB_USERNAME           | Database username                   | `spring`                                    |
+| DB_PASSWORD           | Database password                   | `boot`                                      |
+| SLACK_WEBHOOK_URL     | Slack incoming webhook URL          | `https://hooks.slack.com/services/XXX/XXX/` |
+| SLACK_USERNAME        | Slack username on post              | `Spotleft`                                  |
+| SLACK_CHANNEL         | Slack channel to post               | `#private`                                  |
+| SLACK_ICON_EMOJI      | Slack emoji on post                 | `:flashlight:`                              |
+| SPOTLEFT_URL          | Slack message link URL              | `http://localhost:8080`                     |
+| SPOTLEFT_EXCLUDE_NAME | Exclude instance to notify          | `bosh-health-check`                         |
+| SPOTLEFT_CRON         | Cron schedule to check and notify   | `0 0 0 * * SUN-SAT`                         |
 
 `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` is able to be set via `~/.aws/credentials`.
 
