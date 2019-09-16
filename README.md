@@ -25,6 +25,7 @@ When you use AWS spot instance by Cloud Foundry BOSH, some instance will be star
 | --------------------- | ----------------------------------- | ------------------------------------------- |
 | AWS_ACCESS_KEY_ID     | Access key id for accessing AWS     | `AKIAXXX`                                   |
 | AWS_SECRET_ACCESS_KEY | Secter access key for accessing AWS | `SECRET`                                    |
+| DATABASE_URL          | URL for Database                    | `jdbc:mysql://DB_HOST:3306/spotleft`        |
 | DB_USERNAME           | Database username                   | `spring`                                    |
 | DB_PASSWORD           | Database password                   | `boot`                                      |
 | SLACK_WEBHOOK_URL     | Slack incoming webhook URL          | `https://hooks.slack.com/services/XXX/XXX/` |
