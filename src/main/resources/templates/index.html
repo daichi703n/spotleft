@@ -8,8 +8,8 @@
   <div th:replace="fragments/header :: header">Header</div>
   <div th:class="container">
     <h1><i class="fas fa-search-dollar"></i>Spotleft</h1>
+    <p th:utext="${msg}" />
   </div>
-  <!--<p th:text="${msg}" /> -->
   <div th:replace="fragments/footer :: footer">&copy; Footer</div>
 </body>
 </html>
