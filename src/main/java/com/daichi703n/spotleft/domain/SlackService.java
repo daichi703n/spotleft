@@ -41,13 +41,18 @@ public class SlackService {
         instances.forEach(i -> {
             List<Field> fields = new ArrayList<>();
             fields.add(Field.builder()
-                .title("deployment")
+                .title("Deployment")
                 .value(i.getDeployment())
                 .valueShortEnough(true)
                 .build());
             fields.add(Field.builder()
                 .title("Name")
                 .value(i.getName())
+                .valueShortEnough(true)
+                .build());
+            fields.add(Field.builder()
+                .title("Type")
+                .value(i.getType())
                 .valueShortEnough(true)
                 .build());
             fields.add(Field.builder()
@@ -58,7 +63,7 @@ public class SlackService {
             fields.add(Field.builder()
                 .title("LaunchTime")
                 .value(i.getLaunchTime())
-                .valueShortEnough(true)
+                .valueShortEnough(false)
                 .build());
 
             Attachment attachment = Attachment.builder()
