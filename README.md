@@ -21,7 +21,7 @@ When you use AWS spot instance by Cloud Foundry BOSH, some instance will be star
 
 ## Configurations
 
-| key                   | about                               | example                                     |
+| Setting               | Description                         | Example                                     |
 | --------------------- | ----------------------------------- | ------------------------------------------- |
 | AWS_ACCESS_KEY_ID     | Access key id for accessing AWS     | `AKIAXXX`                                   |
 | AWS_SECRET_ACCESS_KEY | Secter access key for accessing AWS | `SECRET`                                    |
