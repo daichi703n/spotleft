@@ -7,10 +7,10 @@
 <body>
   <div th:replace="fragments/header :: header">Header</div>
   <div th:class="container">
-      <h1>Spotleft - AWS Instances</h1>
+    <h1><i class="fab fa-aws"></i> AWS Instances</h1>
 
     <form th:action="@{/instances/notify}" th:method="post">
-      <input class="btn btn-success float-right" type="submit" value="Notify" />
+      <input class="btn btn-success m-1 float-right fab" type="submit" value="&#xf198; Notify" />
     </form>
 
     <table class="table table-striped">
@@ -41,9 +41,11 @@
         <td>
           <div th:switch="${i.getIsSaved()}">
             <form th:case=false th:action="@{/saved(name=${i.getName()},deployment=${i.getDeployment()},requireSpot=${i.getRequireSpot()})}" th:method="post">
-              <input class="btn btn-primary" type="submit" value="Save" />
+              <input class="btn btn-primary far" type="submit" value="&#xf0c7; Save" />
             </form>
-            <a th:case=true class="btn btn-primary" th:href="@{'/saved/'+${i.getSavedId()}+'/edit'}">Update</a>
+            <a th:case=true class="btn btn-primary" th:href="@{'/saved/'+${i.getSavedId()}+'/edit'}">
+              <i class="fas fa-edit"></i> Update
+            </a>
           </div>
         </td>
       </tr>

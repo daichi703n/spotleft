@@ -11,6 +11,7 @@
         enable_page_level_ads: true
       });
     </script>
+    <script src="https://kit.fontawesome.com/4869ef1cfb.js"></script>
   </div>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
       <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
       <div class="container">
-        <a class="navbar-brand" href="#">Spotleft</a>
+        <a class="navbar-brand" href="#"><i class="fas fa-search-dollar"></i>Spotleft</a>
         <!-- <div class="navbar-header"> -->
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -29,15 +30,15 @@
         </button>
         <!-- </div> -->
         <div class="navbar-collapse collapse" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
-              <a class="nav-link" href="#" th:href="@{/}">Home</a>
+              <a class="nav-link" href="#" th:href="@{/}"><i class="fas fa-home"></i> Home</a>
             </li>
             <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
-              <a class="nav-link" href="#" th:href="@{/instances}">AWS Instances</a>
+              <a class="nav-link" href="#" th:href="@{/instances}"><i class="fab fa-aws"></i> AWS Instances</a>
             </li>
             <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
-              <a class="nav-link" href="#" th:href="@{/saved}">Saved Instances</a>
+              <a class="nav-link" href="#" th:href="@{/saved}"><i class="fas fa-database"></i> Saved Instances</a>
             </li>
             <!-- <li class="nav-item active" th:classappend="${module == 'jikoku' ? 'active' : ''}">
               <a class="nav-link" href="#" th:href="@{/jikoku}">始発表</a>
@@ -46,15 +47,15 @@
               <a href="#" th:href="@{/task-ld}">Tasks (Layout Dialect)</a>
             </li> -->
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="navbar-nav">
             <!-- <li th:if="${#authorization.expression('!isAuthenticated()')}"> -->
-              <a href="/signin" th:href="@{/signin}">
-                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+              <a class="btn btn-primary m-1" href="/signin" th:href="@{/signin}">
+                <i class="fas fa-sign-in-alt"></i> Sign in
               </a>
             <!-- </li> -->
             <!-- <li th:if="${#authorization.expression('isAuthenticated()')}"> -->
-              <a href="/logout" th:href="@{#}" onclick="$('#form').submit();">
-                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout
+              <a class="btn btn-danger m-1" href="/logout" th:href="@{#}" onclick="$('#form').submit();">
+                <i class="fas fa-sign-out-alt"></i> Logout
               </a>
               <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
             <!-- </li> -->
