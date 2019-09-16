@@ -49,5 +49,3 @@ Ref: https://docs.aws.amazon.com/ja_jp/sdk-for-java/v1/developer-guide/credentia
 Spotleft expect **Name** and **deployment** tags on AWS instances. In case of BOSH, these tags are automatically set on deploy VMs.
 
 ![](docs/images/Spotleft_AWS_tags.png)
-
-## LICENSE
