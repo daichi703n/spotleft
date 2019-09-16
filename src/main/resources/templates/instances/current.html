@@ -7,7 +7,7 @@
 <body>
   <div th:replace="fragments/header :: header">Header</div>
   <div th:class="container">
-    <h1><i class="fab fa-aws"></i> AWS Instances</h1>
+    <h1 class="mt-2"><i class="fab fa-aws"></i> AWS Instances</h1>
 
     <form th:action="@{/instances/notify}" th:method="post">
       <input class="btn btn-success m-1 float-right fab" type="submit" value="&#xf198; Notify" />

@@ -7,7 +7,7 @@
 <body>
   <div th:replace="fragments/header :: header">Header</div>
   <div th:class="container">
-    <h1><i class="fas fa-database"></i> Saved Instances</h1>
+    <h1 class="mt-2"><i class="fas fa-database"></i> Saved Instances</h1>
 
     <a class="btn btn-success m-1 float-right" th:href="@{/saved/new}">
       <i class="fas fa-plus"></i> New
@@ -16,7 +16,7 @@
     <table id="spotleft-table" class="table table-striped">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">SavedId</th>
+          <!-- <th scope="col">SavedId</th> -->
           <th scope="col">Name</th>
           <th scope="col">Deployment</th>
           <th scope="col">RequireSpot</th>
@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tr th:each="i, iStat : ${savedInstances}" scope="row">
-        <td th:text="${i.getId()}"/>
+        <!-- <td th:text="${i.getId()}"/> -->
         <td th:text="${i.getName()}"/>
         <td th:text="${i.getDeployment()}"/>
         <td th:text="${i.getRequireSpot()}"/>
