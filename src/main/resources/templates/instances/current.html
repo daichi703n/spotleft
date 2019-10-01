@@ -6,7 +6,7 @@
   </head>
 <body>
   <div th:replace="fragments/header :: header">Header</div>
-  <div th:class="container">
+  <div th:class="container-fluid">
     <h1 class="mt-2"><i class="fab fa-aws"></i> AWS Instances</h1>
 
     <form th:action="@{/instances/notify}" th:method="post">

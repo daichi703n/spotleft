@@ -6,7 +6,7 @@
   </head>
 <body>
   <div th:replace="fragments/header :: header">Header</div>
-    <div class="container">
+    <div class="container-fluid">
       <h1>Edit Saved Instance</h1>
         <form th:action="@{/saved/{id}(id=*{id})}" th:method="put" th:object="${savedInstance}">
         <div class="form-group">
