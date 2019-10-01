@@ -12,6 +12,7 @@ public class SpotleftInfo {
   private String type;
   private String lifecycle;
   private String state;
+  private String availabilityZone;
   private String launchTime;
   private Boolean requireSpot = true;
   private Boolean isSaved = false;

@@ -20,6 +20,7 @@
           <th scope="col">InstanceId</th>
           <th scope="col">Type</th>
           <th scope="col">State</th>
+          <th scope="col">AvailabilityZone</th>
           <th scope="col">LaunchTime</th>
           <th scope="col">Lifecycle</th>
           <th scope="col">RequireSpot</th>
@@ -33,6 +34,7 @@
         <td th:text="${i.getInstanceId()}"/>
         <td th:text="${i.getType()}"/>
         <td th:text="${i.getState()}"/>
+        <td th:text="${i.getAvailabilityZone()}"/>
         <td th:text="${i.getLaunchTime()}"/>
         <td th:text="${i.getLifecycle()}"/>
         <td th:text="${i.getRequireSpot()}"/>
