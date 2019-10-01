@@ -32,3 +32,5 @@ build/
 
 ### Optional ###
 credentials*.yml
+manifest*.yml
+!manifest-sample.yml
