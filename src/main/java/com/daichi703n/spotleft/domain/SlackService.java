@@ -56,6 +56,11 @@ public class SlackService {
                 .valueShortEnough(true)
                 .build());
             fields.add(Field.builder()
+                .title("AvailabilityZone")
+                .value(i.getAvailabilityZone())
+                .valueShortEnough(true)
+                .build());
+            fields.add(Field.builder()
                 .title("Lifecycle")
                 .value(i.getLifecycle())
                 .valueShortEnough(true)
@@ -63,7 +68,7 @@ public class SlackService {
             fields.add(Field.builder()
                 .title("LaunchTime")
                 .value(i.getLaunchTime())
-                .valueShortEnough(false)
+                .valueShortEnough(true)
                 .build());
 
             Attachment attachment = Attachment.builder()
