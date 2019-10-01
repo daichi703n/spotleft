@@ -1,6 +1,5 @@
 package com.daichi703n.spotleft.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.daichi703n.spotleft.domain.*;
@@ -17,9 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @ComponentScan
 @Controller

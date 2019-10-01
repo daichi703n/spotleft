@@ -2,12 +2,9 @@ package com.daichi703n.spotleft.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.daichi703n.spotleft.domain.AwsInstanceService;
-import com.daichi703n.spotleft.domain.SavedInstance;
-import com.daichi703n.spotleft.domain.SavedInstanceService;
 import com.daichi703n.spotleft.domain.SlackService;
 import com.daichi703n.spotleft.domain.SpotleftInfo;
 import com.github.seratch.jslack.api.webhook.WebhookResponse;
@@ -15,7 +12,6 @@ import com.github.seratch.jslack.api.webhook.WebhookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +61,7 @@ public class InstanceController {
             WebhookResponse res = slackService.send(notifyInstances);
             System.out.println(res);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
 

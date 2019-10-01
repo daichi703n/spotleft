@@ -16,33 +16,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduledTasks {
 
-  @Autowired
-  AwsInstanceService awsInstanceService;
+    @Autowired
+    AwsInstanceService awsInstanceService;
 
-  @Autowired
-  SlackService slackService;
+    @Autowired
+    SlackService slackService;
 
-  @Scheduled(cron = "${cron.cron1}")
-  public void notifyInstances() {
-    List<SpotleftInfo> instances = awsInstanceService.findAll();
-    List<SpotleftInfo> notifyInstances = new ArrayList<SpotleftInfo>();
+    @Scheduled(cron = "${cron.cron1}")
+    public void notifyInstances() {
+        List<SpotleftInfo> instances = awsInstanceService.findAll();
+        List<SpotleftInfo> notifyInstances = new ArrayList<SpotleftInfo>();
 
-    instances.forEach(i -> {
-        if (
-            i.getRequireSpot()
-            && !i.getLifecycle().equals("spot")
-            && i.getState().equals("running")
-        ){
-            notifyInstances.add(i);
+        instances.forEach(i -> {
+            if (
+                i.getRequireSpot()
+                && !i.getLifecycle().equals("spot")
+                && i.getState().equals("running")
+            ){
+                notifyInstances.add(i);
+            }
+        });
+        try {
+            WebhookResponse res = slackService.send(notifyInstances);
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    });
-    try {
-        WebhookResponse res = slackService.send(notifyInstances);
-        System.out.println(res);
-    } catch (IOException e) {
-        e.printStackTrace();
+        
     }
-  
-  }
 
 }
