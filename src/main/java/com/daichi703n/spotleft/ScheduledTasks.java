@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class ScheduledTasks {
 
@@ -26,6 +29,8 @@ public class ScheduledTasks {
     public void notifyInstances() {
         List<SpotleftInfo> instances = awsInstanceService.findAll();
         List<SpotleftInfo> notifyInstances = new ArrayList<SpotleftInfo>();
+
+        log.info("Start Notify.");
 
         instances.forEach(i -> {
             if (

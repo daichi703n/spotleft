@@ -2,7 +2,8 @@ package com.daichi703n.spotleft.web;
 
 import java.util.List;
 
-import com.daichi703n.spotleft.domain.*;
+import com.daichi703n.spotleft.domain.SavedInstance;
+import com.daichi703n.spotleft.domain.SavedInstanceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @ComponentScan
 @Controller
 @RequestMapping("/saved")
@@ -54,6 +58,7 @@ public class SavedController {
     @PostMapping
     public String create(@ModelAttribute SavedInstance savedInstance) {
         savedInstanceService.save(savedInstance);
+        log.info("Saved: {}",savedInstance);
         return "redirect:/saved";
     }
 
@@ -61,12 +66,14 @@ public class SavedController {
     public String update(@PathVariable Long id, @ModelAttribute SavedInstance savedInstance) {
         savedInstance.setId(id);
         savedInstanceService.save(savedInstance);
+        log.info("Updated: {}",savedInstance);
         return "redirect:/saved";
     }
 
     @DeleteMapping("{id}")
     public String destroy(@PathVariable Long id) {
         savedInstanceService.delete(id);
+        log.info("Deleted: {}",id);
         return "redirect:/saved";
     }
 }
