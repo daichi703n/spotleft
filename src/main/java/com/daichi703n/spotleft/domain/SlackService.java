@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.seratch.jslack.*;
+import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.model.Attachment;
 import com.github.seratch.jslack.api.model.Field;
-import com.github.seratch.jslack.api.webhook.*;
+import com.github.seratch.jslack.api.webhook.Payload;
+import com.github.seratch.jslack.api.webhook.WebhookResponse;
 
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class SlackService {
 
@@ -79,6 +83,7 @@ public class SlackService {
         });
 
         if (attachments.isEmpty()){
+            log.info("No Illegal Instances.");
             return null;
         }else{
             Payload payload = Payload.builder()
@@ -89,10 +94,12 @@ public class SlackService {
                 .attachments(attachments)
                 .build();
             
+            log.info("POST to Slack: {}",payload);
             Slack slack = Slack.getInstance();
             WebhookResponse response = slack.send(url, payload);
             // response.code, response.message, response.body
 
+            log.info("Response from Slack: {}",response);
             return response;
         }
     }

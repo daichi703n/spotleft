@@ -42,3 +42,8 @@ spring:
 
 cron:
   cron1: "${SPOTLEFT_CRON:0 55 8 * * MON-FRI}"
+
+logging:
+  exception-conversion-word: "\t%replace(%replace(%xEx){'\n','\\\\n'}){'\t','    '}%nopex"
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSSZ}){faint} %clr(${logging.pattern.level:-%5p}) %clr(${PID:}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%logger){cyan} %clr(:){faint} %replace(%m){'\n','\\\\n'}${logging.exception-conversion-word:%wEx}%n"
