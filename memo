@@ -17,3 +17,14 @@ spring:
   datasource:
     username: spring
     password: boot
+
+INSERT INTO instances 
+  (id, name, deployment, require_spot)
+  VALUES
+  (1, 'test', 'test_dep', false)
+;
+INSERT INTO instances 
+  (id, name, deployment, require_spot)
+  VALUES
+  (2, 'test2', 'test_dep2', false)
+;
