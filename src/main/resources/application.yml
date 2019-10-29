@@ -29,6 +29,33 @@ spring:
   jpa:
     hibernate.ddl-auto: update
     show-sql: true
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope: read:user,public_repo
+          test: #TODO: fix test settings
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
+            scope: read:user,read_org,public_repo
+            # redirectUriTemplate: '{baseUrl}/login/oauth2/code/{registrationId}'
+            redirectUriTemplate: 'http://localhost:8080/login/oauth2/code/test'
+            authorizationGrantType: authorization_code
+            # scope:
+            #   - openid
+            #   - profile
+            #   - email
+            # clientName: test
+        provider:
+          test: #TODO: fix test settings
+            authorizationUri: "https://github.com/login/oauth/authorize"
+            tokenUri: "https://github.com/login/oauth/access_token"
+            jwkSetUri: "https://example.com"
+            userInfoUri: "https://api.github.com/user"
+            userNameAttribute: test
 
   # Does not work?
   flyway:
