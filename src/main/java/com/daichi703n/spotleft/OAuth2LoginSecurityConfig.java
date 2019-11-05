@@ -12,7 +12,7 @@ public class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/","/css/**","js/**","/webjars/**").permitAll()
+                .antMatchers("/","/css/**","/js/**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             // .formLogin()
