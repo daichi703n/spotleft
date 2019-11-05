@@ -24,6 +24,7 @@ public class OAuth2LoginSecurityConfig extends WebSecurityConfigurerAdapter {
             //     .permitAll()
                 .and()
             .logout()
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 }
