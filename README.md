@@ -34,6 +34,7 @@ When you use AWS spot instance by Cloud Foundry BOSH, some instance will be star
 | SLACK_CHANNEL         | Slack channel to post               | `#private`                                  |
 | SLACK_ICON_EMOJI      | Slack emoji on post                 | `:flashlight:`                              |
 | SPOTLEFT_URL          | Slack message link URL              | `http://localhost:8080`                     |
+| SPOTLEFT_EXCLUDE_TYPE | Exclude instance type to notify     | `t2.small`                                  |
 | SPOTLEFT_EXCLUDE_NAME | Exclude instance to notify          | `bosh-health-check`                         |
 | SPOTLEFT_CRON         | Cron schedule to check and notify   | `0 0 0 * * SUN-SAT`                         |
 
