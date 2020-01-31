@@ -7,7 +7,7 @@ applications:
   instances: 1
   disk_quota: 256m
   memory: 1g
-  path: target/spotleft-0.0.1.jar
+  path: target/spotleft-0.0.2.jar
   buildpack: java_buildpack_offline
   health-check-type: http
   health-check-http-endpoint: /actuator/health
@@ -28,5 +28,6 @@ applications:
     SLACK_CHANNEL: "#general"
     SLACK_ICON_EMOJI: ":flashlight:"
     SPOTLEFT_URL: "https://spotleft.${DOMAIN}"
+    SPOTLEFT_EXCLUDE_TYPE: t2.small
     SPOTLEFT_EXCLUDE_NAME: bosh-health
     # SPOTLEFT_CRON:
