@@ -62,6 +62,9 @@ public class AwsInstanceService {
                     if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && spotleftInfo.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
                         continue;
                     }
+                    if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && spotleftInfo.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
+                        continue;
+                    }
                     instances.add(spotleftInfo);
 
                     savedInstances.forEach( s -> {
