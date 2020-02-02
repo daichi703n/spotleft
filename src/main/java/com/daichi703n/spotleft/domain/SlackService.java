@@ -39,6 +39,12 @@ public class SlackService {
         List<Attachment> attachments = new ArrayList<Attachment>();
 
         instances.forEach(i -> {
+            if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && i.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
+                return;
+            }
+            if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && i.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
+                return;
+            }
             List<Field> fields = new ArrayList<>();
             fields.add(Field.builder()
                 .title("Deployment")
