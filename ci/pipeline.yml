@@ -1,0 +1,66 @@
+---
+resource_types:
+- name: slack-alert
+  type: docker-image
+  source:
+    repository: arbourd/concourse-slack-alert-resource
+    tag: latest
+- name: cron-resource
+  type: docker-image
+  source:
+    repository: cftoolsmiths/cron-resource
+
+resources:
+- name: notify
+  type: slack-alert
+  icon: slack
+  source:
+    url: ((slack_webhook))
+    channel: ((slack_channel))
+- name: schedule
+  type: cron-resource
+  icon: clock-outline
+  source:
+    expression: ((cron_expression))
+    location: "Asia/Tokyo"
+    fire_immediately: true
+
+jobs:
+- name: recreate-illegal-instances
+  serial: true
+  build_log_retention:
+    builds: 100
+  plan:
+  - in_parallel:
+    - get: schedule
+      trigger: true
+  - task: recreate-illegal-instances
+    timeout: 10m
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: kroniak/ssh-client
+      params: &params
+        jumpbox_private_key: ((jumpbox_private_key))
+        env_name: ((env_name))
+      # inputs:
+      # - name: repo
+      # - name: pypi-awscli-resource
+      # outputs: 
+      # - name: repo
+      # - name: docker-images
+      run: 
+        path: /bin/sh
+        args: 
+        - -c
+        - |
+          echo "${jumpbox_private_key}" > jumpbox.pem
+          chmod 600 jumpbox.pem
+          ssh ((jumpbox_target)) -i jumpbox.pem -o StrictHostKeyChecking=no "curl ((spotleft_url))/api/v1/instances/illegal | jq ."
+          # ssh ((jumpbox_target)) -i jumpbox.pem -o StrictHostKeyChecking=no "curl ((spotleft_url))"
+    on_failure:
+      put: notify
+      params:
+        alert_type: failed
