@@ -31,6 +31,9 @@ build/
 .vscode/
 
 ### Optional ###
-credentials*.yml
+*credentials*.yml
 manifest*.yml
 !manifest-sample.yml
+ci/*set-pipeline*.sh
+!ci/set-pipeline-sample.sh
+!ci/credentials-sample.yml

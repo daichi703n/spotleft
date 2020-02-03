@@ -59,12 +59,6 @@ public class AwsInstanceService {
                     spotleftInfo.setState(instance.getState().getName());
                     spotleftInfo.setAvailabilityZone(instance.getPlacement().getAvailabilityZone());
                     spotleftInfo.setLaunchTime(instance.getLaunchTime().toString());
-                    if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && spotleftInfo.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
-                        continue;
-                    }
-                    if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && spotleftInfo.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
-                        continue;
-                    }
                     instances.add(spotleftInfo);
 
                     savedInstances.forEach( s -> {

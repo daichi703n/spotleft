@@ -1,4 +1,4 @@
-package com.daichi703n.spotleft.web;
+package com.daichi703n.spotleft.web.api.v1;
 
 import java.util.List;
 
@@ -6,8 +6,6 @@ import com.daichi703n.spotleft.domain.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,40 +14,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @ComponentScan
-@Controller
-@RequestMapping("/api/saved")
+@RestController
+@RequestMapping("/api/v1/saved")
 public class ApiSavedController {
 
     @Autowired
     private SavedInstanceService savedInstanceService;
 
     @GetMapping
-    public String instances(Model model) {
+    public List<SavedInstance> instances() {
         List<SavedInstance> savedInstances = savedInstanceService.findAll();
-        model.addAttribute("savedInstances",savedInstances);
-        return "instances/saved";
+        return savedInstances;
     }
     
     @GetMapping("new")
-    public String newSavedInstance(Model model) {
-        return "saved/new";
+    public String newSavedInstance() {
+        return "Please POST to {id}";
     }
     
 
     @GetMapping("{id}/edit")
-    public String edit(@PathVariable Long id, Model model) {
+    public SavedInstance edit(@PathVariable Long id) {
         SavedInstance savedInstance = savedInstanceService.findById(id);
-        model.addAttribute("savedInstance",savedInstance);
-        return "saved/edit";
+        return savedInstance;
     }
 
     @GetMapping("{id}")
-    public String show(@PathVariable Long id, Model model) {
+    public SavedInstance show(@PathVariable Long id) {
         SavedInstance savedInstance = savedInstanceService.findById(id);
-        model.addAttribute("savedInstance",savedInstance);
-        return "saved/edit";
+        return savedInstance;
     }
 
     @PostMapping

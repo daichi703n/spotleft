@@ -1,0 +1,111 @@
+---
+resource_types:
+- name: slack-alert
+  type: docker-image
+  source:
+    repository: arbourd/concourse-slack-alert-resource
+    tag: latest
+- name: cron-resource
+  type: docker-image
+  source:
+    repository: cftoolsmiths/cron-resource
+
+resources:
+- name: notify
+  type: slack-alert
+  icon: slack
+  source:
+    url: ((slack_webhook))
+    channel: ((slack_channel))
+- name: schedule
+  type: cron-resource
+  icon: clock-outline
+  source:
+    expression: ((cron_expression))
+    location: "Asia/Tokyo"
+    fire_immediately: true
+
+jobs:
+- name: recreate-illegal-instances
+  # max_in_flight: 2
+  serial: true
+  build_log_retention:
+    builds: 100
+  plan:
+  - in_parallel:
+    - get: schedule
+      trigger: true
+  - task: recreate-illegal-instances
+    timeout: 10m
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: kroniak/ssh-client
+      params: &params
+        jumpbox_private_key: ((jumpbox_private_key))
+        env_name: ((env_name))
+      outputs: 
+      - name: result
+      run: 
+        path: /bin/bash
+        args: 
+        - -c
+        - |
+          apk add jq
+          echo "${jumpbox_private_key}" > jumpbox.pem
+          chmod 600 jumpbox.pem
+          ssh ((jumpbox_target)) -i jumpbox.pem -o StrictHostKeyChecking=no "curl -s ((spotleft_url))/api/v1/instances/illegal | jq ." | tee -a result/spotleft_illegal_instances.json
+          # cat result/spotleft_illegal_instances.json
+          DEPLOYMENTS_COUNT=`cat result/spotleft_illegal_instances.json | jq '. | length'`
+          i=0
+          while [ $i -lt $DEPLOYMENTS_COUNT ]
+          do
+            # echo $i
+            DEPLOYMENT_NAME=`cat result/spotleft_illegal_instances.json | jq ".|keys[$i]"`
+            INSTANCE_NAME=`cat result/spotleft_illegal_instances.json | jq '.['$DEPLOYMENT_NAME'][0]["name"]'`
+            
+            # echo $DEPLOYMENT_NAME
+            # echo $INSTANCE_NAME
+            # echo "yes | bosh -d $DEPLOYMENT_NAME recreate $INSTANCE_NAME"
+            
+            echo "Recreate $DEPLOYMENT_NAME: $INSTANCE_NAME"
+            (ssh ((jumpbox_target)) -i jumpbox.pem -o StrictHostKeyChecking=no "source .bash_profile; cd bosh-manifests; source .envrc; yes | bosh -d $DEPLOYMENT_NAME recreate $INSTANCE_NAME") &
+            let i++
+            echo "Waiting for starting recreate ..."
+            sleep 2
+          done
+    on_failure:
+      put: notify
+      params:
+        alert_type: failed
+  - task: notify-if-recreate
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: alpine
+          tag: latest
+      inputs:
+      - name: result
+      outputs:
+      - name: result
+      run:
+        path: sh
+        args:
+        - -c
+        - |
+          apk add jq
+          if [ `cat result/spotleft_illegal_instances.json | jq ".|keys[0]"` != "null" ]; then
+            sed -i '1s/^/Start BOSH recreating illegal normal instances.\n/' result/spotleft_illegal_instances.json;
+            echo "Illegal Instances: `cat result/spotleft_illegal_instances.json`";
+            exit 1;
+          fi
+          echo "No Illegal Instances"
+    on_failure:
+      put: notify
+      params:
+        alert_type: default
+        message_file: result/spotleft_illegal_instances.json
