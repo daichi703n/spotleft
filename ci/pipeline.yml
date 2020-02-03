@@ -108,6 +108,4 @@ jobs:
       put: notify
       params:
         alert_type: default
-        channel: ((slack_channel))
-        username: ((slack_username))
         message_file: result/spotleft_illegal_instances.json
