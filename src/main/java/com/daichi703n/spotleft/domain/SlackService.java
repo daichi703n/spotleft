@@ -90,7 +90,21 @@ public class SlackService {
 
         if (attachments.isEmpty()){
             log.info("No Illegal Instances.");
-            return null;
+            Payload payload = Payload.builder()
+                .text("<"+spotleftUrl+"/instances| :tada: No illegal normal instance>")
+                .username(username)
+                .channel(channel)
+                .iconEmoji(iconEmoji)
+                .attachments(attachments)
+                .build();
+            
+            log.info("POST to Slack: {}",payload);
+            Slack slack = Slack.getInstance();
+            WebhookResponse response = slack.send(url, payload);
+            // response.code, response.message, response.body
+
+            log.info("Response from Slack: {}",response);
+            return response;
         }else{
             Payload payload = Payload.builder()
                 .text("<"+spotleftUrl+"/instances|Spotleft found illegal normal instance>")
