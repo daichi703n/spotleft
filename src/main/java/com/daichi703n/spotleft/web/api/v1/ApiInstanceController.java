@@ -40,6 +40,12 @@ public class ApiInstanceController {
         List<SpotleftInfo> instances = awsInstanceService.findAll();
         List<SpotleftInfo> illegalInstances = new ArrayList<SpotleftInfo>();
         instances.forEach(i -> {
+            if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && i.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
+                return;
+            }
+            if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && i.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
+                return;
+            }
             if (
                 i.getRequireSpot()
                 && !i.getLifecycle().equals("spot")
