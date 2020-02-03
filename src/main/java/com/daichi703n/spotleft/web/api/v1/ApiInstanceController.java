@@ -48,7 +48,9 @@ public class ApiInstanceController {
                 illegalInstances.add(i);
             }
         });
-        Map<String, List<SpotleftInfo>> map = illegalInstances.stream().collect(Collectors.groupingBy(i -> i.getDeployment()));
+        Map<String, List<SpotleftInfo>> map = illegalInstances.stream()
+            .filter(i -> i.getDeployment() != null)
+            .collect(Collectors.groupingBy(i -> i.getDeployment()));
 
         // return illegalInstances;
         return map;
