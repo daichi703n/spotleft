@@ -55,6 +55,8 @@ public class ApiInstanceController {
                 i.getRequireSpot()
                 && !i.getLifecycle().equals("spot")
                 && i.getState().equals("running")
+                && i.getDeployment() != null
+                && i.getName() != null
             ){
                 illegalInstances.add(i);
             }
@@ -65,6 +67,7 @@ public class ApiInstanceController {
         log.debug(illegalInstances.toString());
         Map<String, List<SpotleftInfo>> map = illegalInstances.stream()
             .filter(i -> i.getDeployment() != null)
+            .filter(i -> i.getName() != null)
             .collect(Collectors.groupingBy(i -> i.getDeployment()));
 
         // return illegalInstances;
