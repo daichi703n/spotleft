@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/instances")
 public class ApiInstanceController {
@@ -41,21 +44,30 @@ public class ApiInstanceController {
         List<SpotleftInfo> illegalInstances = new ArrayList<SpotleftInfo>();
         instances.forEach(i -> {
             if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && i.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
+                log.info("Skip excluded name: {}", i.getName());
                 return;
             }
             if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && i.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
+                log.info("Skip excluded type: {}", i.getType());
                 return;
             }
             if (
                 i.getRequireSpot()
                 && !i.getLifecycle().equals("spot")
                 && i.getState().equals("running")
+                && i.getDeployment() != null
+                && i.getName() != null
             ){
                 illegalInstances.add(i);
             }
+            log.debug(i.getDeployment());
+            log.debug(i.getName());
         });
+        log.debug("---map---");
+        log.debug(illegalInstances.toString());
         Map<String, List<SpotleftInfo>> map = illegalInstances.stream()
             .filter(i -> i.getDeployment() != null)
+            .filter(i -> i.getName() != null)
             .collect(Collectors.groupingBy(i -> i.getDeployment()));
 
         // return illegalInstances;

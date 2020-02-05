@@ -14,6 +14,9 @@ import com.amazonaws.services.ec2.model.Instance;
 import com.amazonaws.services.ec2.model.Reservation;
 import com.amazonaws.services.ec2.model.Tag;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class AwsInstanceService {
 
@@ -73,7 +76,8 @@ public class AwsInstanceService {
                         }
                     });
 
-                    // System.out.println(spotleftInfo.getInstanceId());
+                    log.debug(spotleftInfo.getInstanceId());
+                    log.debug(instance.toString());
                 }
             }
 
@@ -82,7 +86,7 @@ public class AwsInstanceService {
             if(response.getNextToken() == null) {
                 done = true;
             }
-            // System.out.println(response.toString());
+            log.trace(response.toString());
             // instances.add(response.getReservations().getInstances());
         }
         return instances;
