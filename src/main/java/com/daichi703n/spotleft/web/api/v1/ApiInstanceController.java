@@ -43,6 +43,11 @@ public class ApiInstanceController {
         List<SpotleftInfo> instances = awsInstanceService.findAll();
         List<SpotleftInfo> illegalInstances = new ArrayList<SpotleftInfo>();
         instances.forEach(i -> {
+            log.debug(i.getDeployment());
+            log.debug(i.getName());
+            if (i.getDeployment() == null || i.getName() == null){
+                return;
+            }
             if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && i.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
                 log.info("Skip excluded name: {}", i.getName());
                 return;
@@ -55,15 +60,11 @@ public class ApiInstanceController {
                 i.getRequireSpot()
                 && !i.getLifecycle().equals("spot")
                 && i.getState().equals("running")
-                && i.getDeployment() != null
-                && i.getName() != null
             ){
                 illegalInstances.add(i);
             }
-            log.debug(i.getDeployment());
-            log.debug(i.getName());
         });
-        log.debug("---map---");
+        log.debug("---generate and return map---");
         log.debug(illegalInstances.toString());
         Map<String, List<SpotleftInfo>> map = illegalInstances.stream()
             .filter(i -> i.getDeployment() != null)
