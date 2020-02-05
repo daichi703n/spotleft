@@ -39,6 +39,9 @@
               <a class="nav-link" href="#" th:href="@{/instances}"><i class="fab fa-aws"></i> AWS Instances</a>
             </li>
             <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
+              <a class="nav-link" href="#" th:href="@{/instances/illegal}"><i class="fab fa-aws"></i> Illegal Normal Instances</a>
+            </li>
+            <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
               <a class="nav-link" href="#" th:href="@{/saved}"><i class="fas fa-database"></i> Saved Instances</a>
             </li>
             <li class="nav-item active" th:classappend="${module == 'home' ? 'active' : ''} ">
