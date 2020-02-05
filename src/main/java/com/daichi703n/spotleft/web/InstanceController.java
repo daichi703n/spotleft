@@ -39,6 +39,38 @@ public class InstanceController {
         return "instances/current";
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "illegal")
+    public String illegalInstances(Model model) {
+
+        List<SpotleftInfo> instances = awsInstanceService.findAll();
+        List<SpotleftInfo> illegalInstances = new ArrayList<SpotleftInfo>();
+        instances.forEach(i -> {
+            log.debug(i.getDeployment());
+            log.debug(i.getName());
+            if (i.getDeployment() == null || i.getName() == null){
+                return;
+            }
+            if (System.getenv("SPOTLEFT_EXCLUDE_NAME") != null && i.getName().contains(System.getenv("SPOTLEFT_EXCLUDE_NAME"))){
+                log.info("Skip excluded name: {}", i.getName());
+                return;
+            }
+            if (System.getenv("SPOTLEFT_EXCLUDE_TYPE") != null && i.getType().contains(System.getenv("SPOTLEFT_EXCLUDE_TYPE"))){
+                log.info("Skip excluded type: {}", i.getType());
+                return;
+            }
+            if (
+                i.getRequireSpot()
+                && !i.getLifecycle().equals("spot")
+                && i.getState().equals("running")
+            ){
+                illegalInstances.add(i);
+            }
+        });
+
+        model.addAttribute("instances",illegalInstances);
+        return "instances/current";
+    }
+
     @PostMapping("notify")
     public String instances(@RequestBody(required=false) String body) {
 
