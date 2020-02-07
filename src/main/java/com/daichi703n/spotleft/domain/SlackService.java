@@ -91,7 +91,7 @@ public class SlackService {
         if (attachments.isEmpty()){
             log.info("No Illegal Instances.");
             Payload payload = Payload.builder()
-                .text("<"+spotleftUrl+"/instances| :tada: No illegal normal instance>")
+                .text("<"+spotleftUrl+"/instances/illegal| :tada: No illegal normal instance>")
                 .username(username)
                 .channel(channel)
                 .iconEmoji(iconEmoji)
@@ -107,7 +107,7 @@ public class SlackService {
             return response;
         }else{
             Payload payload = Payload.builder()
-                .text("<"+spotleftUrl+"/instances|Spotleft found illegal normal instance>")
+                .text("<"+spotleftUrl+"/instances/illegal|Spotleft found illegal normal instance>")
                 .username(username)
                 .channel(channel)
                 .iconEmoji(iconEmoji)
